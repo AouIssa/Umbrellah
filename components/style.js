@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { View, Image, Text} from 'react-native';
-import { Constants } from 'expo-constants';
+import  Constants  from 'expo-constants';
 
-const StatusBarHeight = Constants.StatusBarHeight;
+const StatusBarHeight = Constants.statusBarHeight;
 
 //colors
 export const Colors = {
@@ -20,7 +20,7 @@ const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
 export const StyledContainer = styled.View`
   flex: 1;
   padding: 25px;
-  padding-top: ${StatusBarHeight + 10};
+  padding-top: ${StatusBarHeight + 10}px;
   background-color: ${primary};
 `;
 
@@ -31,8 +31,8 @@ export const InnerContainer = styled.View`
 `;
 
 export const PageLogo = styled.Image`
-  width: 250px;
-  height: 200px;
+  width: 350px;
+  height: 250px;
 `;
 
 export const PageTitle = styled.Text`
