@@ -8,11 +8,11 @@ const StatusBarHeight = Constants.statusBarHeight;
 export const Colors = {
   primary: '#fffff',
   secondary: '#E5E7EB',
-  tertiary: '1F2937',
+  tertiary: '#1F2937',
   darkLight: '#9CAEAF',
   brand: '#6D28D9',
   green: '#10B981',
-  red: 'EF4444',
+  red: '#EF4444',
 };
 
 const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
@@ -41,4 +41,13 @@ export const PageTitle = styled.Text`
   font-weight: bold;
   color: ${brand};
   padding: 10px
+`;
+
+
+export const SubTitle = styled.Text`
+  font-size: 18px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: ${tertiary};
 `;
