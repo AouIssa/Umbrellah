@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 
 // formik
 import { Formik } from 'formik';
 
 //icons
-import { Octicons } from '@expo/vector-icons';
+import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons';
 
 import {
   StyledContainer,
@@ -18,14 +18,24 @@ import {
   StyledInputLabel,
   StyledTextInput,
   RightIcon,
+  StyledButton,
+  ButtonText,
   Colors,
+  Line,
+  MsgBox,
+  ExtraView,
+  ExtraText,
+  TextLink,
+  TextLinkContent,
 } from './../components/style';
 import { View } from 'react-native';
 
 //colors
-const { brand, darkLight } = Colors;
+const { brand, darkLight, primary } = Colors;
 
 const Login = () => {
+  const [hidePassword, setHidePassword] = useState(true);
+
   return (
     <StyledContainer>
       <StatusBar style="dark" />
@@ -37,31 +47,60 @@ const Login = () => {
         <Formik
           initialValues={{ email: '', password: '' }}
           onSubmit={(values) => {
-            console.log('Login');
+            console.log('values');
           }}
         >
-          {({ handleChange, handleBlur, handleSubmit, values }) =>( 
-          <StyledFormArea>
-            <MyTextinput
-            label="Email Address"
-            icon = "mail"
-            placeholder = "yourEmail@example.com"
-            placeholderTextColor = {darkLight}
-            onChangeText={handleChange('email')}
-            onBlur={handleBlur('email')}
-            value={values.email}
-            keyboardType= "email-address"
-            
-            />
+          {({ handleChange, handleBlur, handleSubmit, values }) => (
+            <StyledFormArea>
+              <MyTextinput
+                label="Email Address"
+                icon="mail"
+                placeholder="yourEmail@example.com"
+                placeholderTextColor={darkLight}
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                value={values.email}
+                keyboardType="email-address"
+              />
 
-          </StyledFormArea>)}
+              <MyTextinput
+                label="Password"
+                icon="lock"
+                placeholder="* * * * * * * * * * * * * *"
+                placeholderTextColor={darkLight}
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+                value={values.password}
+                secureTextEntry={hidePassword}
+                isPassword={true}
+                hidePassword={hidePassword}
+                setHidePassword={setHidePassword}
+              />
+              <MsgBox>...</MsgBox>
+              <StyledButton onPress={handleSubmit}>
+                <ButtonText>Login</ButtonText>
+              </StyledButton>
+              <Line />
+              <StyledButton google={true} onPress={handleSubmit}>
+                <Fontisto name="google" color={primary} size={25} />
+                <ButtonText google={true}>Sign in with Google</ButtonText>
+              </StyledButton>
+
+              <ExtraView>
+                <ExtraText>Don't have an account already? </ExtraText>
+                <TextLink>
+                  <TextLinkContent>Signup</TextLinkContent>
+                </TextLink>
+              </ExtraView>
+            </StyledFormArea>
+          )}
         </Formik>
       </InnerContainer>
     </StyledContainer>
   );
 };
 
-const MyTextinput = ({ label, icon, ...props }) => {
+const MyTextinput = ({ label, icon, isPassword, hidePassword, setHidePassword, ...props }) => {
   return (
     <View>
       <LeftIcon>
@@ -69,6 +108,11 @@ const MyTextinput = ({ label, icon, ...props }) => {
       </LeftIcon>
       <StyledInputLabel> {label} </StyledInputLabel>
       <StyledTextInput {...props} />
+      {isPassword && (
+        <RightIcon onPress={() => setHidePassword(!hidePassword)}>
+          <Ionicons name={hidePassword ? 'md-eye-off' : 'md-eye'} size={30} color={darkLight} />
+        </RightIcon>
+      )}
     </View>
   );
 };
