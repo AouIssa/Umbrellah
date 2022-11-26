@@ -7,6 +7,9 @@ import { Formik } from 'formik';
 //icons
 import { Octicons, Ionicons, Fontisto } from '@expo/vector-icons';
 
+//keyboard avoid view
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+
 import {
   StyledContainer,
   InnerContainer,
@@ -57,6 +60,7 @@ const SignUp = () => {
   };
 
   return (
+    <KeyboardAvoidingWrapper>
     <StyledContainer>
       <StatusBar style="dark" />
       <InnerContainer>
@@ -158,6 +162,7 @@ const SignUp = () => {
         </Formik>
       </InnerContainer>
     </StyledContainer>
+    </KeyboardAvoidingWrapper>
   );
 };
 
