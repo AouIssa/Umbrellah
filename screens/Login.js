@@ -36,7 +36,7 @@ const { brand, darkLight, primary } = Colors;
 //keyboard avoid view
 import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
 
   return (
@@ -52,6 +52,7 @@ const Login = () => {
             initialValues={{ email: '', password: '' }}
             onSubmit={(values) => {
               console.log('values');
+              navigation.navigate('Welcome');
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -81,9 +82,6 @@ const Login = () => {
                   setHidePassword={setHidePassword}
                 />
 
-                
-
-
                 <MsgBox>...</MsgBox>
                 <StyledButton onPress={handleSubmit}>
                   <ButtonText>Login</ButtonText>
@@ -96,7 +94,7 @@ const Login = () => {
 
                 <ExtraView>
                   <ExtraText>Don't have an account already? </ExtraText>
-                  <TextLink>
+                  <TextLink onPress={() => navigation.navigate('SignUp')}>
                     <TextLinkContent>Signup</TextLinkContent>
                   </TextLink>
                 </ExtraView>
