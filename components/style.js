@@ -148,7 +148,7 @@ export const ButtonText = styled.Text`
   ${(props) =>
     props.google == true &&
     `
-  padding: 25px;
+    margin-left: 25px;
   `}
 `;
 

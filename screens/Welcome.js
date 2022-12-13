@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 
-
-
 import {
   StyledContainer,
   InnerContainer,
@@ -40,6 +38,10 @@ const Welcome = ({navigation}) => {
             <Line />
             <StyledButton onPress={() => {navigation.navigate('Login')}}>
               <ButtonText>Logout</ButtonText>
+            </StyledButton>
+
+            <StyledButton onPress={() => {navigation.navigate('Explore')}}>
+              <ButtonText>Map</ButtonText>
             </StyledButton>
           </StyledFormArea>
         </WelcomeContainer>
