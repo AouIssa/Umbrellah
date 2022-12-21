@@ -30,6 +30,35 @@ const styles = StyleSheet.create({
     map: {
       ...StyleSheet.absoluteFillObject,
     },
+
+    //Callout bubble
+    bubble: {
+      flexDirection: 'row',
+      alignSelf: 'flex-start',
+      backgroundColor: '#fff',
+      borderRadius: 6,
+      borderColor: '#ccc',
+      borderWidth: 0.5,
+      padding: 15,
+      width: 150,
+    },
+
+    arrow: {
+      backgroundColor: 'transparent',
+      borderColor: 'transparent',
+      borderTopColor: '#fff',
+      borderWidth: 16,
+      alignSelf: 'center',
+      marginTop: -32,
+    },
+
+    arrrowBorder: {
+      backgroundColor: 'transparent',
+      borderColor: 'transparent',
+      borderTopColor: '#007a'
+
+    }
+
    });
 
    export default Explore;
