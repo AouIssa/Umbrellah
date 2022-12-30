@@ -36,28 +36,12 @@ import { View, TouchableOpacity } from 'react-native';
 //colors
 const { brand, darkLight, primary } = Colors;
 
-// Datetimepicker
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 const SignUp = ({navigation}) => {
   const [hidePassword, setHidePassword] = useState(true);
   const [show, setShow] = useState(false);
-  const [date, setDate] = useState(new Date(1598051730000));
+  
 
-  //Actual date of birth
-
-  const [dob, setDob] = useState();
-
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(false);
-    setDate(currentDate);
-    setDob(currentDate);
-  };
-
-  const showDatePicker = () => {
-    setShow(true);
-  };
 
   return (
     <KeyboardAvoidingWrapper>
@@ -67,20 +51,10 @@ const SignUp = ({navigation}) => {
         <PageTitle>Umbrellah</PageTitle>
         <SubTitle>Account Sign Up</SubTitle>
 
-        {show && (
-          <DateTimePicker
-            style={{ width: '100%'}}
-            testID="dateTimePicker"
-            value={date}
-            mode="date"
-            is24Hour={true}
-            display="default"
-            onChange={onChange}
-          />
-        )}
+  
 
         <Formik
-          initialValues={{ fullName: '', dateOfBirth: '', email: '', password: '', confrimPassword: '' }}
+          initialValues={{ fullName: '', email: '', password: '', confrimPassword: '' }}
           onSubmit={(values) => {
             console.log('values');
             navigation.navigate('Welcome');
@@ -109,18 +83,7 @@ const SignUp = ({navigation}) => {
                 keyboardType="email-address"
               />
 
-              <MyTextinput
-                label="Date of Birth"
-                icon="calendar"
-                placeholder="YYYY - MM - DD"
-                placeholderTextColor={darkLight}
-                onChangeText={handleChange('dateOfBirth')}
-                onBlur={handleBlur('dateOfBirth')}
-                value={dob ? dob.toDateString() : ''}
-                isDate={true}
-                editable={false}
-                showDatePicker={showDatePicker}
-              />
+          
               <MyTextinput
                 label="Password"
                 icon="lock"
@@ -168,7 +131,8 @@ const SignUp = ({navigation}) => {
   );
 };
 
-const MyTextinput = ({ label, icon, isPassword, hidePassword, setHidePassword, isDate, showDatePicker, ...props }) => {
+
+const MyTextinput = ({ label, icon, isPassword, hidePassword, setHidePassword, isDate, ...props }) => {
   return (
     <View>
       <LeftIcon>
