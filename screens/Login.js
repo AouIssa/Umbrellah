@@ -28,7 +28,7 @@ import {
   TextLink,
   TextLinkContent,
 } from './../components/style';
-import { View } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 
 //colors
 const { brand, darkLight, primary } = Colors;
@@ -36,8 +36,46 @@ const { brand, darkLight, primary } = Colors;
 //keyboard avoid view
 import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
+// API client
+import axios from 'axios';
+
+import baseURL from '../client';
+
+
 const Login = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
+  const [message, setMessage] = useState();
+  const [messageType, setMessageType] = useState();
+
+  const handleLogin = (credentials, setSubmitting) => {
+    handleMessage(null);
+
+    axios
+      .post(baseURL + "/signin", credentials)
+      .then((response) => {
+        const result = response.data;
+        const { message, status, data } = result;
+
+        if (status !== 'SUCCESS') {
+          handleMessage(message, status);
+        } else {
+          navigation.navigate('Welcome', { ...data[0] });
+        }
+        setSubmitting(false);
+      })
+      .catch((error) => {
+        console.log(error.toJSON());
+        setSubmitting(false);
+        handleMessage('An error occured. Check your network and try again');
+      });
+  };
+
+
+
+  const handleMessage = (message, type = 'FAILED') => {
+    setMessage(message);
+    setMessageType(type);
+  };
 
   return (
     <KeyboardAvoidingWrapper>
@@ -50,12 +88,16 @@ const Login = ({ navigation }) => {
 
           <Formik
             initialValues={{ email: '', password: '' }}
-            onSubmit={(values) => {
-              console.log('values');
-              navigation.navigate('Welcome');
+            onSubmit={(values, { setSubmitting }) => {
+              if (values.email == '' || values.password == '') {
+                handleMessage('Please fill all the fields');
+                setSubmitting(false);
+              } else {
+                handleLogin(values, setSubmitting);
+              }
             }}
           >
-            {({ handleChange, handleBlur, handleSubmit, values }) => (
+            {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (
               <StyledFormArea>
                 <MyTextinput
                   label="Email Address"
@@ -82,10 +124,19 @@ const Login = ({ navigation }) => {
                   setHidePassword={setHidePassword}
                 />
 
-                <MsgBox>...</MsgBox>
-                <StyledButton onPress={handleSubmit}>
-                  <ButtonText>Login</ButtonText>
-                </StyledButton>
+                <MsgBox type={messageType}>{message}</MsgBox>
+                {!isSubmitting && (
+                  <StyledButton onPress={handleSubmit}>
+                    <ButtonText>Login</ButtonText>
+                  </StyledButton>
+                )}
+
+                {isSubmitting && (
+                  <StyledButton disabled={true}>
+                    <ActivityIndicator size="large" color={primary} />
+                  </StyledButton>
+                )}
+
                 <Line />
                 <StyledButton google={true} onPress={handleSubmit}>
                   <Fontisto name="google" color={primary} size={25} />
