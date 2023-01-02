@@ -39,7 +39,7 @@ import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 // API client
 import axios from 'axios';
 
-import baseURL from '../client';
+import baseURL from '../api/client';
 
 
 const Login = ({ navigation }) => {
