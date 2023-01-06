@@ -53,7 +53,7 @@ export const Avatar = styled.Image`
 `;
 
 export const WelcomeImage = styled.Image`
-  height: 50%;
+  height: 40%;
   width: 100%;
 `;
 
@@ -139,6 +139,16 @@ export const StyledButton = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: center;
   `}
+`;
+
+export const StyledButtonLogout = styled.TouchableOpacity`
+  padding: 15px;
+  background-color: ${red};
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  margin-vertical: 5px;
+  height: 60px;
 `;
 
 export const ButtonText = styled.Text`

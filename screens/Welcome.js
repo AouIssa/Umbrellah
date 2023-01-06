@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import {
   StyledContainer,
   InnerContainer,
- 
+  StyledButtonLogout,
   PageTitle,
   SubTitle,
   StyledFormArea,
@@ -46,9 +46,9 @@ const Welcome = ({navigation, route}) => {
               <ButtonText>Scan QR</ButtonText>
             </StyledButton>
 
-            <StyledButton onPress={() => {navigation.navigate('Login')}}>
+            <StyledButtonLogout onPress={() => {navigation.navigate('Login')}}>
               <ButtonText>Logout</ButtonText>
-            </StyledButton>
+            </StyledButtonLogout>
 
             
           </StyledFormArea>
