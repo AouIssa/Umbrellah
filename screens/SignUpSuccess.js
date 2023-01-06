@@ -20,9 +20,7 @@ import {
 } from './../components/style';
 
 
-const Welcome = ({navigation, route}) => {
-
-  const {uname, email} = route.params;
+const SignUpSuccess = ({navigation}) => {
 
   return (
     <>
@@ -30,27 +28,18 @@ const Welcome = ({navigation, route}) => {
       <InnerContainer>
         <WelcomeImage resizeMode="cover" source={require('./../assets/home.jpg')} />
         <WelcomeContainer>
-          <PageTitle welcome={true}>Welcome!</PageTitle>
-          <SubTitle welcome={true}>{uname || "John Smith"}</SubTitle>
-          <SubTitle welcome={true}>{email || "johnSmith@gmail.com"}</SubTitle>
+          <PageTitle welcome={true}>Sign Up succsefull!</PageTitle>
+          <SubTitle welcome={true}>Please procced to login</SubTitle>
 
           <StyledFormArea>
             <Avatar resizeMode="cover" source={require('./../assets/Logo.png')} />
 
             <Line />
-            <StyledButton onPress={() => {navigation.navigate('Explore')}}>
-              <ButtonText>Map</ButtonText>
-            </StyledButton>
-
-            <StyledButton onPress={() => {navigation.navigate('ScanQR')}}>
-              <ButtonText>Scan QR</ButtonText>
-            </StyledButton>
-
             <StyledButton onPress={() => {navigation.navigate('Login')}}>
-              <ButtonText>Logout</ButtonText>
+              <ButtonText>Login</ButtonText>
             </StyledButton>
 
-            
+        
           </StyledFormArea>
         </WelcomeContainer>
       </InnerContainer>
@@ -59,4 +48,4 @@ const Welcome = ({navigation, route}) => {
 };
 
 
-export default Welcome;
+export default SignUpSuccess;

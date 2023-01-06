@@ -62,7 +62,7 @@ const SignUp = ({ navigation }) => {
         if (status !== 'SUCCESS') {
           handleMessage(message, status);
         } else {
-          navigation.navigate('Welcome', { ...data[0] });
+          navigation.navigate({ SignUpSuccess });
         }
         setSubmitting(false);
       })
