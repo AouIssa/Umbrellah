@@ -41,7 +41,6 @@ import axios from 'axios';
 
 import baseURL from '../api/client';
 
-
 const Login = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
   const [message, setMessage] = useState();
@@ -51,7 +50,7 @@ const Login = ({ navigation }) => {
     handleMessage(null);
 
     axios
-      .post(baseURL + "/signin", credentials)
+      .post(baseURL + '/signin', credentials)
       .then((response) => {
         const result = response.data;
         const { message, status, data } = result;
@@ -70,87 +69,87 @@ const Login = ({ navigation }) => {
       });
   };
 
-
-
   const handleMessage = (message, type = 'FAILED') => {
     setMessage(message);
     setMessageType(type);
   };
 
   return (
-    <KeyboardAvoidingWrapper>
-      <StyledContainer>
-        <StatusBar style="dark" />
-        <InnerContainer>
-          <PageLogo resizeMode="cover" source={require('./../assets/Logo.png')} />
-          <PageTitle>Umbrellah</PageTitle>
-          <SubTitle>Account Login</SubTitle>
+    <>
+      <KeyboardAvoidingWrapper>
+        <StyledContainer>
+          <StatusBar style="dark" />
+          <InnerContainer>
+            <PageLogo resizeMode="cover" source={require('./../assets/Logo.png')} />
+            <PageTitle>Umbrellah</PageTitle>
+            <SubTitle>Account Login</SubTitle>
 
-          <Formik
-            initialValues={{ email: '', password: '' }}
-            onSubmit={(values, { setSubmitting }) => {
-              if (values.email == '' || values.password == '') {
-                handleMessage('Please fill all the fields');
-                setSubmitting(false);
-              } else {
-                handleLogin(values, setSubmitting);
-              }
-            }}
-          >
-            {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (
-              <StyledFormArea>
-                <MyTextinput
-                  label="Email Address"
-                  icon="mail"
-                  placeholder="yourEmail@example.com"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange('email')}
-                  onBlur={handleBlur('email')}
-                  value={values.email}
-                  keyboardType="email-address"
-                />
+            <Formik
+              initialValues={{ email: '', password: '' }}
+              onSubmit={(values, { setSubmitting }) => {
+                if (values.email == '' || values.password == '') {
+                  handleMessage('Please fill all the fields');
+                  setSubmitting(false);
+                } else {
+                  handleLogin(values, setSubmitting);
+                }
+              }}
+            >
+              {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (
+                <StyledFormArea>
+                  <MyTextinput
+                    label="Email Address"
+                    icon="mail"
+                    placeholder="yourEmail@example.com"
+                    placeholderTextColor={darkLight}
+                    onChangeText={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values.email}
+                    keyboardType="email-address"
+                  />
 
-                <MyTextinput
-                  label="Password"
-                  icon="lock"
-                  placeholder="* * * * * * * * * * * * * *"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange('password')}
-                  onBlur={handleBlur('password')}
-                  value={values.password}
-                  secureTextEntry={hidePassword}
-                  isPassword={true}
-                  hidePassword={hidePassword}
-                  setHidePassword={setHidePassword}
-                />
+                  <MyTextinput
+                    label="Password"
+                    icon="lock"
+                    placeholder="* * * * * * * * * * * * * *"
+                    placeholderTextColor={darkLight}
+                    onChangeText={handleChange('password')}
+                    onBlur={handleBlur('password')}
+                    value={values.password}
+                    secureTextEntry={hidePassword}
+                    isPassword={true}
+                    hidePassword={hidePassword}
+                    setHidePassword={setHidePassword}
+                  />
 
-                <MsgBox type={messageType}>{message}</MsgBox>
-                {!isSubmitting && (
-                  <StyledButton onPress={handleSubmit}>
-                    <ButtonText>Login</ButtonText>
-                  </StyledButton>
-                )}
+                  <MsgBox type={messageType}>{message}</MsgBox>
+                  {!isSubmitting && (
+                    <StyledButton onPress={handleSubmit}>
+                      <ButtonText>Login</ButtonText>
+                    </StyledButton>
+                  )}
 
-                {isSubmitting && (
-                  <StyledButton disabled={true}>
-                    <ActivityIndicator size="large" color={primary} />
-                  </StyledButton>
-                )}
+                  {isSubmitting && (
+                    <StyledButton disabled={true}>
+                      <ActivityIndicator size="large" color={primary} />
+                    </StyledButton>
+                  )}
 
-                <Line />
-              
-                <ExtraView>
-                  <ExtraText>Don't have an account already? </ExtraText>
-                  <TextLink onPress={() => navigation.navigate('SignUp')}>
-                    <TextLinkContent>Signup</TextLinkContent>
-                  </TextLink>
-                </ExtraView>
-              </StyledFormArea>
-            )}
-          </Formik>
-        </InnerContainer>
-      </StyledContainer>
-    </KeyboardAvoidingWrapper>
+                  <Line />
+
+                  <ExtraView>
+                    <ExtraText>Don't have an account already? </ExtraText>
+                    <TextLink onPress={() => navigation.navigate('SignUp')}>
+                      <TextLinkContent>Signup</TextLinkContent>
+                    </TextLink>
+                  </ExtraView>
+                </StyledFormArea>
+              )}
+            </Formik>
+          </InnerContainer>
+        </StyledContainer>
+      </KeyboardAvoidingWrapper>
+    </>
   );
 };
 

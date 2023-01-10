@@ -10,30 +10,44 @@ export const Colors = {
   secondary: '#E5E7EB',
   tertiary: '#1F2937',
   darkLight: '#9CAEAF',
-  brand: '#6D28D9',
+  brand: '#846DD3',
   green: '#10B981',
   red: '#EF4444',
+  bgM: '#1C1C1C',
 };
 
-const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
+const { primary, secondary, tertiary, darkLight, brand, green, red, bgM} = Colors;
 
 export const StyledContainer = styled.View`
   flex: 1;
-  padding: 25px;
-  padding-top: ${StatusBarHeight + 30}px;
-  background-color: ${primary};
+  padding-left: 25px;
+  padding-right: 25px;
+  height: 100%;
+  padding-top: ${StatusBarHeight}%;
+  padding-bottom:  ${StatusBarHeight}%;
+  background-color: ${bgM};
 `;
 
 export const InnerContainer = styled.View`
   flex: 1;
   width: 100%;
   align-items: center;
+  background-color: ${bgM};
 `;
 
 export const WelcomeContainer = styled(InnerContainer)`
   padding: 25px;
   padding-top: 10px;
   justify-content: center;
+`;
+
+export const UmbrellaContainer = styled(InnerContainer)`
+  padding: 15px;
+  justify-content: center;
+  border-color: red;
+  border-radius: 3px;
+  border-width: thick;
+  
 `;
 
 export const PageLogo = styled.Image`
@@ -76,7 +90,7 @@ export const SubTitle = styled.Text`
   margin-bottom: 20px;
   letter-spacing: 1px;
   font-weight: bold;
-  color: ${tertiary};
+  color: ${primary};
 
   ${(props) =>
     props.welcome &&
@@ -141,6 +155,17 @@ export const StyledButton = styled.TouchableOpacity`
   `}
 `;
 
+export const StyledButtonUmbrella = styled.TouchableOpacity`
+  padding: 5px;
+  background-color: ${red};
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  margin-vertical: 5px;
+  height: auto;
+`;
+
+
 export const StyledButtonLogout = styled.TouchableOpacity`
   padding: 15px;
   background-color: ${red};
@@ -185,7 +210,7 @@ export const ExtraView = styled.View`
 export const ExtraText = styled.Text`
   justify-content: center;
   align-content: center;
-  color: ${tertiary};
+  color: #F3F3F3;
   font-size: 15px;
 `;
 

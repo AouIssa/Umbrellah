@@ -10,6 +10,7 @@ import Welcome from './../screens/Welcome';
 import Explore from '../screens/Explore';
 import SignUpSuccess from '../screens/SignUpSuccess';
 import ScanQR from '../screens/ScanQR';
+import Umbrella from '../screens/Umbrella';
 
 //React Navigation
 import { NavigationContainer } from '@react-navigation/native';
@@ -39,7 +40,9 @@ const RootStack = () => {
         <Stack.Screen name="SignUpSuccess" component={SignUpSuccess} />
         <Stack.Screen name="Explore" component={Explore} />
         <Stack.Screen name="ScanQR" component={ScanQR} />
+        <Stack.Screen name="Umbrella" component={Umbrella} />
 
+        
         <Stack.Screen options={{ headerTintColor: primary }} name="Welcome" component={Welcome} />
       </Stack.Navigator>
     </NavigationContainer>

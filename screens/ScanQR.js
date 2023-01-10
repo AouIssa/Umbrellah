@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { StyledButton } from '../components/style';
 
-export default function ScanQR() {
+const ScanQR = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [text, setText] = useState('Not yet scanned')
+  const [text, setText] = useState('Not yet scanned');
 
   const askForCameraPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === 'granted');
-    })()
-  }
+    })();
+  };
 
   // Request Camera Permission
   useEffect(() => {
@@ -22,8 +23,11 @@ export default function ScanQR() {
   // What happens when we scan the bar code
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    setText(data)
-    console.log('Type: ' + type + '\nData: ' + data)
+    setText(data);
+    console.log('Type: ' + type + '\nData: ' + data);
+    if (data == '1290Umbre') {
+      navigation.navigate('Umbrella');
+    }
   };
 
   // Check permissions and return the screens
@@ -31,14 +35,16 @@ export default function ScanQR() {
     return (
       <View style={styles.container}>
         <Text>Requesting for camera permission</Text>
-      </View>)
+      </View>
+    );
   }
   if (hasPermission === false) {
     return (
       <View style={styles.container}>
         <Text style={{ margin: 10 }}>No access to camera</Text>
         <Button title={'Allow Camera'} onPress={() => askForCameraPermission()} />
-      </View>)
+      </View>
+    );
   }
 
   // Return the View
@@ -47,19 +53,20 @@ export default function ScanQR() {
       <View style={styles.barcodebox}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 400, width: 400 }} />
+          style={{ height: 400, width: 400 }}
+        />
       </View>
       <Text style={styles.maintext}>{text}</Text>
 
-      {scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
+      {scanned && <Button title={'Invalid!! Scan again??'} onPress={() => setScanned(false)} color="tomato" />}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFE0',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -74,6 +81,8 @@ const styles = StyleSheet.create({
     width: 300,
     overflow: 'hidden',
     borderRadius: 30,
-    backgroundColor: 'tomato'
-  }
+    backgroundColor: 'tomato',
+  },
 });
+
+export default ScanQR;
