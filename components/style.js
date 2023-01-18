@@ -165,6 +165,16 @@ export const StyledButtonUmbrella = styled.TouchableOpacity`
   height: auto;
 `;
 
+export const StyledButtonMap = styled.TouchableOpacity`
+  padding: 5px;
+  background-color: ${red};
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  margin-vertical: 5px;
+  height: 60px;
+`;
+
 
 export const StyledButtonLogout = styled.TouchableOpacity`
   padding: 15px;

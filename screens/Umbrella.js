@@ -29,18 +29,24 @@ const Umbrella = ({ navigation, route }) => {
   const [timerDuration, setTimerDuration] = useState(90000);
   const [resetTimer, setResetTimer] = useState(false);
   const [resetStopwatch, setResetStopwatch] = useState(false);
-  var fees;
+
 
   const handleButton = () => {
     setIsStopwatchStart(false);
     setResetStopwatch(true);
   };
+  let y = 0.0;
+  let fees = 0.0;
+  
 
-
+  const handleFees = () => {
+    6
+  }
   return (
     <>
       <InnerContainer>
         <WelcomeImage resizeMode="cover" source={require('./../assets/bookedUmbrella.png')} />
+        <PageTitle >{handleFees}</PageTitle>
 
         <UmbrellaContainer>
           <View style={styles.sectionStyle}>
@@ -53,14 +59,26 @@ const Umbrella = ({ navigation, route }) => {
               //To reset
               options={options}
               //options for the styling
-              getTime={(time) => {
+              getMsecs={(time) => {
                 console.log(time);
-                for (fees = 0; time = 1; fees++) {
-                  fees++;
+                y++;
+               
+                
+                
+                if (y == 100) {
+                  console.log("TOOOOOOOOOOOOOOOOOOOOOO")
+                  fees++
+                  y=0
+                }
+                if (fees == 3){
+                  console.log("You did it!!")
+                  handleFees
                   
                 }
+                
               }}
             />
+           
             <TouchableHighlight
               onPress={() => {
               setIsStopwatchStart(false);

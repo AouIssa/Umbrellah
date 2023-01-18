@@ -58,7 +58,7 @@ const Login = ({ navigation }) => {
         if (status !== 'SUCCESS') {
           handleMessage(message, status);
         } else {
-          navigation.navigate('Welcome', { ...data[0] });
+          navigation.navigate('HomeScreen', { ...data[0] });
         }
         setSubmitting(false);
       })
