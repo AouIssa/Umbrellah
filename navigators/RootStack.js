@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Colors } from './../components/style';
 const { primary, tertiary } = Colors;
 
@@ -16,9 +15,9 @@ import MapScreen from '../screens/MapScreen';
 
 //React Navigation
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 const RootStack = () => {
   return (
@@ -35,7 +34,7 @@ const RootStack = () => {
             paddingLeft: 20,
           },
         }}
-        initialRouteName="Login"
+        initialRouteName="HomeScreen"
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
