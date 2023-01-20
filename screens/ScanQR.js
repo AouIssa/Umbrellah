@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { StyledButton } from '../components/style';
+import { useNavigation } from '@react-navigation/native';
+import tw from 'twrnc';
 
-const ScanQR = ({ navigation }) => {
+const ScanQR = () => {
+  const navigation = useNavigation();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState('Not yet scanned');
@@ -26,7 +29,7 @@ const ScanQR = ({ navigation }) => {
     setText(data);
     console.log('Type: ' + type + '\nData: ' + data);
     if (data == '1290Umbre') {
-      navigation.navigate('Umbrella');
+      navigation.navigate('CostOptionsCard');
     }
   };
 
@@ -50,10 +53,10 @@ const ScanQR = ({ navigation }) => {
   // Return the View
   return (
     <View style={styles.container}>
-      <View style={styles.barcodebox}>
+      <View style={[styles.barcodebox]}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 400, width: 400 }}
+          style={{ height: 250, width: 250 }}
         />
       </View>
       <Text style={styles.maintext}>{text}</Text>
@@ -66,6 +69,7 @@ const ScanQR = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: 100,
     backgroundColor: '#FFFFE0',
     alignItems: 'center',
     justifyContent: 'center',
@@ -77,8 +81,9 @@ const styles = StyleSheet.create({
   barcodebox: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 300,
-    width: 300,
+    height: 250,
+    width: 250,
+
     overflow: 'hidden',
     borderRadius: 30,
     backgroundColor: 'tomato',

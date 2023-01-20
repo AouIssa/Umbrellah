@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux';
 import { setDestination } from '../slices/navSlice';
 import { useNavigation } from '@react-navigation/native';
 import NavFavourites from './NavFavourites';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Icon } from '@rneui/base';
 const NavigateCard = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -39,7 +41,15 @@ const NavigateCard = () => {
             }}
           />
         </View>
-        <NavFavourites/>
+        <NavFavourites />
+      </View>
+      <View style={tw`flex-row bg-white justify-evenly py-2 mt-auto border-t border-gray-100`}>
+        <TouchableOpacity 
+        onPress={()=> navigation.navigate('BookOptionsCard')}
+        style={tw`flex-row bg-[#744AFF] w-100 px-4 py-3 rounded-full justify-center`}>
+          <Icon name="umbrella" type="font-awesome" color="white" size={36} />
+          <Text style={tw`text-white text-center text-3xl`}>  Book</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
