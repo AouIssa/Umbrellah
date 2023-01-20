@@ -44,6 +44,7 @@ const RootStack = () => {
         <Stack.Screen name="Umbrella" component={Umbrella} />
         <Stack.Screen name="MapScreen" component={MapScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
+       
         <Stack.Screen options={{ headerTintColor: primary }} name="Welcome" component={Welcome} />
       </Stack.Navigator>
     </NavigationContainer>

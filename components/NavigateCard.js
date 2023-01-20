@@ -4,9 +4,11 @@ import tw from 'twrnc';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { GOOGLE_MAPS_APIKEY } from '@env';
 import { useDispatch } from 'react-redux';
-import {setDestination} from "../slices/navSlice"
+import { setDestination } from '../slices/navSlice';
+import { useNavigation } from '@react-navigation/native';
 const NavigateCard = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={tw`bg-white flex-1`}>
       <Text style={tw`text-center py-5 text-xl`}>Hey Aous</Text>
@@ -21,7 +23,13 @@ const NavigateCard = () => {
             debounce={400}
             minLength={2}
             onPress={(data, details = null) => {
-              dispatch
+              dispatch(
+                setDestination({
+                  location: details.geometry.location,
+                  description: data.description,
+                }),
+              );
+              navigation.navigate('BookOptionsCard');
             }}
             styles={toInputBoxStyles}
             query={{
