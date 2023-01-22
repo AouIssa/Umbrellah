@@ -32,24 +32,26 @@ const NavigateCard = () => {
                   description: data.description,
                 }),
               );
-              navigation.navigate('BookOptionsCard');
+              navigation.navigate('CostOptionsCard');
             }}
             styles={toInputBoxStyles}
+            
             query={{
               key: GOOGLE_MAPS_APIKEY,
               language: 'en',
+              components: 'country:MY',
             }}
           />
         </View>
         <NavFavourites />
       </View>
       <View style={tw`flex-row bg-white justify-evenly py-2 mt-auto border-t border-gray-100`}>
-        <TouchableOpacity 
+        {/* <TouchableOpacity 
         onPress={()=> navigation.navigate('CostOptionsCard')}
         style={tw`flex-row bg-[#744AFF] w-100 px-4 py-3 rounded-full justify-center`}>
           <Icon name="umbrella" type="font-awesome" color="white" size={36} />
           <Text style={tw`text-white text-center text-3xl`}>  Book</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </SafeAreaView>
   );

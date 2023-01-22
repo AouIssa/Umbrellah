@@ -5,7 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { LogBox, KeyboardAvoidingView,Platform } from 'react-native';
+import { LogBox, KeyboardAvoidingView, Platform } from 'react-native';
 // Ignore log notification by message
 LogBox.ignoreLogs(['Warning: ...']);
 
@@ -22,9 +22,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <SafeAreaProvider>
-        
-          <RootStack />
-        
+        <RootStack />
       </SafeAreaProvider>
     </Provider>
   );

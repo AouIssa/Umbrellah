@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Image, KeyboardAvoidingView } from 'react-native';
 import React, { useState } from 'react';
 import tw from 'twrnc';
 import { Icon } from '@rneui/base';
 import { useNavigation } from '@react-navigation/native';
 import { FlatList } from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
+import { selectTravelTimeInformation } from '../slices/navSlice';
 
 const data = [
   {
@@ -19,9 +21,14 @@ const data = [
     image: 'https://i.imgur.com/xV9myuC.png',
   },
 ];
+
+const SURGE_CHARGE_RATE = 1.5;
+
 const CostOptionsCard = () => {
   const navigation = useNavigation();
   const [selected, setSelected] = useState(null);
+  const travelTimeInformation = useSelector(selectTravelTimeInformation);
+
   return (
     <SafeAreaView style={tw`bg-white flex-grow`}>
       <View>
@@ -31,7 +38,7 @@ const CostOptionsCard = () => {
         >
           <Icon name="chevron-left" type="fontawesome" />
         </TouchableOpacity>
-        <Text style={tw`text-center py-5 text-xl`}>Book Umbrella</Text>
+        <Text style={tw`text-center py-5 text-xl`}>Book Umbrella - {travelTimeInformation?.distance?.text}</Text>
       </View>
 
       <FlatList
@@ -44,27 +51,34 @@ const CostOptionsCard = () => {
           >
             <Image
               style={{
-                width: 100,
+                width: 70,
                 height: 100,
                 resizeMode: 'contain',
               }}
               source={{ uri: image }}
             />
-            <View style={tw`-ml-6`}>
+            <View style={tw`mx-3`}>
               <Text style={tw`text-xl font-semibold`}>{title}</Text>
-              <Text style={tw``}>Cost</Text>
+              <Text style={tw``}>{travelTimeInformation?.duration?.text} Travel Time</Text>
             </View>
-            <Text style={tw`text-xl`}>MYR100</Text>
+            <Text style={tw`text-xl mr-4`}>
+              {new Intl.NumberFormat('en-gb', {
+                style: 'currency',
+                currency: 'MYR',
+              }).format((travelTimeInformation?.duration?.value * multiplier) / 100)}
+            </Text>
           </TouchableOpacity>
         )}
       />
-      <View>
-        <TouchableOpacity style={tw`${!selected && 'opacity-40'}`} disabled={!selected}>
-          <View style={tw`bg-[#744AFF] py-6 m-3 rounded-full`}>
-            <Text style={tw`text-center text-white text-2xl`}>Choose {selected?.title} </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <KeyboardAvoidingView>
+        <View style={tw`mt-auto border-t border-gray-200`}>
+          <TouchableOpacity style={tw`${!selected && 'opacity-40'}`} disabled={!selected}>
+            <View style={tw`bg-[#744AFF] py-6 m-3 rounded-full`}>
+              <Text style={tw`text-center text-white text-2xl`}>Choose {selected?.title} </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
