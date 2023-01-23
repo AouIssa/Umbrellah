@@ -17,6 +17,7 @@ import RootStack from './navigators/RootStack';
 import Umbrella from './screens/Umbrella';
 import Welcome from './screens/Welcome';
 import HomeScreen from './screens/HomeScreen';
+import DirectionsScreen from './screens/DirectionsScreen';
 import { store } from './store';
 export default function App() {
   return (

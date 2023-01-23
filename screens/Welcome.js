@@ -42,7 +42,7 @@ const Welcome = ({navigation, route}) => {
             </StyledButton>
 
             <StyledButton onPress={() => {navigation.navigate('Explore')}}>
-              <ButtonText>Find An Umbrella</ButtonText>
+              <ButtonText>Find An Umbrella Station</ButtonText>
             </StyledButton>
 
             <StyledButton onPress={() => {navigation.navigate('Explore')}}>

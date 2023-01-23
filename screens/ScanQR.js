@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+
+import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { StyledButton } from '../components/style';
 import { useNavigation } from '@react-navigation/native';
 import tw from 'twrnc';
+
+import { Icon } from '@rneui/base';
+
+import { Ionicons } from '@expo/vector-icons';
 
 const ScanQR = () => {
   const navigation = useNavigation();
@@ -29,7 +34,7 @@ const ScanQR = () => {
     setText(data);
     console.log('Type: ' + type + '\nData: ' + data);
     if (data == '1290Umbre') {
-      navigation.navigate('CostOptionsCard');
+      navigation.navigate('HomeScreen');
     }
   };
 
@@ -53,15 +58,47 @@ const ScanQR = () => {
   // Return the View
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('HomeScreen')}
+        style={tw`bg-gray-100 absolute top-16 left-8 z-50 p-3 rounded-full shadow-lg`}
+      >
+        <Icon name="menu" />
+      </TouchableOpacity>
       <View style={[styles.barcodebox]}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 250, width: 250 }}
+          style={{ height: 350, width: 350 }}
         />
       </View>
-      <Text style={styles.maintext}>{text}</Text>
+      {/* <Text style={styles.maintext}>{text}</Text> */}
 
-      {scanned && <Button title={'Invalid!! Scan again??'} onPress={() => setScanned(false)} color="tomato" />}
+      {scanned && (
+        <TouchableOpacity
+          onPress={() => setScanned(false)}
+          style={[
+            styles.scanAgainButton,
+            {
+              backgroundColor: '#fff',
+              padding: 10,
+              borderRadius: 5,
+              alignItems: 'center',
+              justifyContent: 'center',
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.8,
+              shadowRadius: 2,
+              elevation: 1,
+            },
+          ]}
+        >
+          <View style={styles.scanAgainContainer}>
+            <Text style={tw`text-2xl`}>Scan Again</Text>
+            <View style={styles.scanAgainIconContainer}>
+              <Ionicons name="close-circle" size={42} color="red" />
+            </View>
+          </View>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -87,6 +124,28 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderRadius: 30,
     backgroundColor: 'tomato',
+  },
+  scanAgainButton: {
+    backgroundColor: '#ffc107',
+    padding: 10,
+    borderRadius: 5,
+    alignSelf: 'center',
+  },
+  scanAgainContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  scanAgainButton: {
+    width: '80%',
+    marginTop: 20,
+    marginHorizontal: 'auto',
+  },
+  scanAgainIconContainer: {
+    marginLeft: 10,
+  },
+  qrCodeContainer: {
+    marginTop: 20,
   },
 });
 
