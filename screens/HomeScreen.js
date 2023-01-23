@@ -14,7 +14,7 @@ const HomeScreen = () => {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
-      <View style={tw`bg-white h-full`}>
+      <View style={tw`bg-gray-50 h-full`}>
         <View style={tw`p-5`}>
           <Image
             style={{

@@ -1,9 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import tw from 'twrnc';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDestination, selectOrigin, setTravelTimeInformation } from '../slices/navSlice';
+import {
+  selectDestination,
+  selectOrigin,
+  setDestination,
+  setTravelTimeInformation,
+  setMarker,
+} from '../slices/navSlice';
 import MapViewDirections from 'react-native-maps-directions';
 import { GOOGLE_MAPS_APIKEY } from '@env';
 
@@ -34,6 +40,21 @@ const Map = () => {
     };
     getTravelTime();
   }, [origin, destination, GOOGLE_MAPS_APIKEY]);
+
+  useEffect(() => {
+    if (!origin || !destination) return;
+
+    const getCoordinates = async () => {
+      fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${destination.description}&key=${GOOGLE_MAPS_APIKEY}`,
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          //dispatch(setDestination(data.results[0].geometry.location));
+        });
+    };
+    getCoordinates();
+  }, [destination, GOOGLE_MAPS_APIKEY]);
 
   return (
     <MapView

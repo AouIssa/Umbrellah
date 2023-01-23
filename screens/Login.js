@@ -58,7 +58,7 @@ const Login = ({ navigation }) => {
         if (status !== 'SUCCESS') {
           handleMessage(message, status);
         } else {
-          navigation.navigate('HomeScreen', { ...data[0] });
+          navigation.navigate('Welcome', { ...data[0] });
         }
         setSubmitting(false);
       })
@@ -139,7 +139,7 @@ const Login = ({ navigation }) => {
 
                   <ExtraView>
                     <ExtraText>Don't have an account already? </ExtraText>
-                    <TextLink onPress={() => navigation.navigate('HomeScreen')}>
+                    <TextLink onPress={() => navigation.navigate('SignUp')}>
                       <TextLinkContent>Signup</TextLinkContent>
                     </TextLink>
                   </ExtraView>

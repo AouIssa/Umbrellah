@@ -35,15 +35,18 @@ const Welcome = ({navigation, route}) => {
           <SubTitle welcome={true}>{email || "johnSmith@gmail.com"}</SubTitle>
 
           <StyledFormArea>
-            <Avatar resizeMode="cover" source={require('./../assets/Logo.png')} />
 
             <Line />
-            <StyledButton onPress={() => {navigation.navigate('Explore')}}>
-              <ButtonText>Map</ButtonText>
+            <StyledButton onPress={() => {navigation.navigate('HomeScreen')}}>
+              <ButtonText>Book An Umbrella</ButtonText>
             </StyledButton>
 
-            <StyledButton onPress={() => {navigation.navigate('ScanQR')}}>
-              <ButtonText>Scan QR</ButtonText>
+            <StyledButton onPress={() => {navigation.navigate('Explore')}}>
+              <ButtonText>Find An Umbrella</ButtonText>
+            </StyledButton>
+
+            <StyledButton onPress={() => {navigation.navigate('Explore')}}>
+              <ButtonText>Top Up</ButtonText>
             </StyledButton>
 
             <StyledButtonLogout onPress={() => {navigation.navigate('Login')}}>
