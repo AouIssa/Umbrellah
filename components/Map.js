@@ -50,7 +50,9 @@ const Map = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          //dispatch(setDestination(data.results[0].geometry.location));
+          if(data && data.results && data.results[0] && data.results[0].geometry){
+            dispatch(setDestination({...destination, location: data.results[0].geometry.location}));
+          }
         });
     };
     getCoordinates();
