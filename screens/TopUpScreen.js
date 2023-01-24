@@ -24,24 +24,25 @@ const TopUpScreen = () => {
   return (
     <SafeAreaView style={tw`flex-1`}>
       <View style={tw`h-8/10`}>
-        <View style={tw`bg-gray-100 absolute top-16 left-8 z-50 p-3 rounded-full shadow-lg`}>
-          <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
-            <Ionicons size="large" name="home" />
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={tw`bg-gray-100 absolute top-16 left-8 z-50 p-3 rounded-full shadow-lg`}
+          onPress={() => navigation.navigate('HomeScreen')}
+        >
+          <Ionicons size="large" name="home" />
+        </TouchableOpacity>
 
         <View style={tw`flex-1 flex justify-center items-center`}>
-          <Text style={tw`text-3xl font-medium text-center`}>Balance: ${balance.balance}</Text>
+          <Text style={tw`text-3xl font-medium text-center`}>Balance: RM{balance.balance}</Text>
 
           <View style={tw`mt-10`}>
-            <TouchableOpacity style={tw`bg-blue-500 p-3 rounded-full`} onPress={() => handleTopUp(10)}>
-              <Text style={tw`text-white text-center`}>Top up $10</Text>
+            <TouchableOpacity style={tw`bg-blue-500 p-3 rounded-full`} onPress={() => handleTopUp(5)}>
+              <Text style={tw`text-white text-center`}>Top up RM5</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={tw`bg-blue-500 p-3 rounded-full mt-4`} onPress={() => handleTopUp(10)}>
+              <Text style={tw`text-white text-center`}>Top up RM10</Text>
             </TouchableOpacity>
             <TouchableOpacity style={tw`bg-blue-500 p-3 rounded-full mt-4`} onPress={() => handleTopUp(20)}>
-              <Text style={tw`text-white text-center`}>Top up $20</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={tw`bg-blue-500 p-3 rounded-full mt-4`} onPress={() => handleTopUp(50)}>
-              <Text style={tw`text-white text-center`}>Top up $50</Text>
+              <Text style={tw`text-white text-center`}>Top up RM20</Text>
             </TouchableOpacity>
             <View style={tw`mt-4 flex`}>
               <Input

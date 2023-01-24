@@ -5,17 +5,23 @@ import NavOptions from '../components/NavOptions';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { GOOGLE_MAPS_APIKEY } from '@env';
 import { useSelector, useDispatch } from 'react-redux';
-import { setDestination, setOrigin } from '../slices/navSlice';
+import { Icon } from '@rneui/base';
+import { setDestination, setOrigin, selectDestination, selectOrigin } from '../slices/navSlice';
 import NavFavourites from '../components/NavFavourites';
 import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const balance = useSelector((state) => state.balance);
+  const origin = useSelector(selectOrigin);
+  const navigation = useNavigation();
+  const destination = useSelector(selectDestination);
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
-      <View style={tw`bg-gray-50 h-full`}>
+      <View style={tw`bg-gray-100 h-full`}>
         <View style={tw`p-5`}>
           <Image
             style={{
@@ -26,7 +32,19 @@ const HomeScreen = () => {
             source={require('./../assets/Logo.png')}
           />
 
-          <Text style={tw`text-3xl font-medium text-center`}>Balance: ${balance.balance}</Text>
+          <SafeAreaView style={tw`absolute top-10 right-5 p-2 rounded-lg bg-white shadow-md`}>
+            <TouchableOpacity style={tw`flex-row items-center p-3`} onPress={() => navigation.navigate('TopUpScreen')}>
+              <Icon
+                style={tw`mr-4 rounded-full bg-[#744AFF] p-3`}
+                name={'wallet'}
+                type="ionicon"
+                color="white"
+                size={20}
+              />
+
+              <Text style={tw`text-base font-medium text-center text-black`}>Balance: RM{balance.balance}</Text>
+            </TouchableOpacity>
+          </SafeAreaView>
 
           <Text>FROM</Text>
           <GooglePlacesAutocomplete
@@ -118,8 +136,19 @@ const HomeScreen = () => {
               components: 'country:MY',
             }}
           />
-          <NavOptions />
+          {/* <NavOptions /> */}
           <NavFavourites />
+          <View style={tw`${!destination && 'opacity-40'}`}>
+            <TouchableOpacity
+              disabled={!destination}
+              style={tw`bg-indigo-500 rounded-md p-2`}
+              onPress={() => navigation.navigate('MapScreen')}
+            >
+              <View>
+                <Text style={tw`text-white text-center text-lg font-medium`}>Go to Map</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </KeyboardAvoidingView>
