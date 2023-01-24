@@ -5,16 +5,19 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { StyledButton } from '../components/style';
 import { useNavigation } from '@react-navigation/native';
 import tw from 'twrnc';
-
 import { Icon } from '@rneui/base';
-
 import { Ionicons } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { setOrigin, selectOrigin } from '../slices/navSlice';
+import { setDestination } from '../slices/navSlice';
 
 const ScanQR = () => {
   const navigation = useNavigation();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState('Not yet scanned');
+  const dispatch = useDispatch();
+  const origin = useSelector(selectOrigin);
 
   const askForCameraPermission = () => {
     (async () => {
@@ -34,6 +37,12 @@ const ScanQR = () => {
     setText(data);
     console.log('Type: ' + type + '\nData: ' + data);
     if (data == '1290Umbre') {
+      dispatch(
+        setOrigin({
+          location: { lat: 3.0023237, lng: 101.7059165 },
+          description: 'Sultan Abdul Samad Library, Jalan Upm, Serdang, Selangor, Malaysia',
+        }),
+      );
       navigation.navigate('HomeScreen');
     }
   };

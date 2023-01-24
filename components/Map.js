@@ -9,6 +9,7 @@ import {
   setDestination,
   setTravelTimeInformation,
   setMarker,
+  setOrigin,
 } from '../slices/navSlice';
 import MapViewDirections from 'react-native-maps-directions';
 import { GOOGLE_MAPS_APIKEY } from '@env';
@@ -50,14 +51,28 @@ const Map = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          if(data && data.results && data.results[0] && data.results[0].geometry){
-            dispatch(setDestination({...destination, location: data.results[0].geometry.location}));
+          if (data && data.results && data.results[0] && data.results[0].geometry) {
+            dispatch(setDestination({ ...destination, location: data.results[0].geometry.location }));
           }
         });
     };
     getCoordinates();
   }, [destination, GOOGLE_MAPS_APIKEY]);
 
+  useEffect(() => {
+    if (!origin || !destination) return;
+
+    const getCoordinatesORIGIN = async () => {
+      fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${origin.description}&key=${GOOGLE_MAPS_APIKEY}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && data.results && data.results[0] && data.results[0].geometry) {
+            dispatch(setOrigin({ ...origin, location: data.results[0].geometry.location }));
+          }
+        });
+    };
+    getCoordinatesORIGIN();
+  }, [origin, GOOGLE_MAPS_APIKEY]);
   return (
     <MapView
       ref={mapRef}
