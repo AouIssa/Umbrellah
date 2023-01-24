@@ -26,37 +26,37 @@ const Map = () => {
     ? { latitude: myLocation.location.lat, longitude: myLocation.location.lng }
     : {};
 
-    useEffect(() => {
-      (async () => {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== 'granted') {
-          setErrorMsg('Permission to access location was denied');
-        }
-        let location = await Location.getCurrentPositionAsync({});
-        setMyLocation({ location: { lat: location.coords.latitude, lng: location.coords.longitude } });
-  
-        if (mapRef.current)
-          mapRef.current.animateToRegion(
-            {
-              latitude: location.coords.latitude,
-              longitude: location.coords.longitude,
-              latitudeDelta: 0.005,
-              longitudeDelta: 0.005,
-            },
-            1000,
-          );
-      })();
-    }, []);
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      setMyLocation({ location: { lat: location.coords.latitude, lng: location.coords.longitude } });
+
+      if (mapRef.current)
+        mapRef.current.animateToRegion(
+          {
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005,
+          },
+          1000,
+        );
+    })();
+  }, []);
 
   useEffect(() => {
-    if (!origin || !destination) return;
-    mapRef.current.fitToSuppliedMarkers(['origin', 'destination'], {
+    if (!userLocationX || !destination) return;
+    mapRef.current.fitToSuppliedMarkers(['myLocation', 'destination'], {
       edgePadding: { top: 50, right: 50, bottom: 50, left: 50 },
     });
-  }, [origin, destination]);
+  }, [userLocationX, destination]);
 
   useEffect(() => {
-    if (!origin || !destination) return;
+    if (!myLocation || !destination) return;
 
     const getTravelTime = async () => {
       fetch(
@@ -68,11 +68,10 @@ const Map = () => {
         });
     };
     getTravelTime();
-  }, [origin, destination, GOOGLE_MAPS_APIKEY,myLocation]);
-
+  }, [origin, destination, GOOGLE_MAPS_APIKEY, myLocation]);
 
   useEffect(() => {
-    if (!origin || !destination) return;
+    if (!destination) return;
 
     const getCoordinates = async () => {
       fetch(
@@ -108,16 +107,20 @@ const Map = () => {
       showsUserLocation
       style={tw`flex-1`}
       mapType="mutedStandard"
-      initialRegion={{
-        latitude: origin.location.lat,
-        longitude: origin.location.lng,
-        latitudeDelta: 0.005,
-        longitudeDelta: 0.005,
-      }}
+      initialRegion={
+        myLocation?.location
+          ? {
+              latitude: myLocation.location.lat,
+              longitude: myLocation.location.lng,
+              latitudeDelta: 0.005,
+              longitudeDelta: 0.005,
+            }
+          : undefined
+      }
     >
-      {origin && destination && (
+      {myLocation && destination && (
         <MapViewDirections
-          origin={origin.description}
+          origin={{latitude:userLocationX.latitude,longitude:userLocationX.longitude}}
           destination={destination.description}
           apikey={GOOGLE_MAPS_APIKEY}
           strokeWidth={3}
@@ -149,18 +152,18 @@ const Map = () => {
         />
       )}
 
-          {myLocation?.location && myLocation.location.lat && myLocation.location.lng && (
-            <Marker
-              pinColor={'purple'}
-              coordinate={{
-                latitude: myLocation.location.lat,
-                longitude: myLocation.location.lng,
-              }}
-              title="Origin"
-              description={myLocation.description}
-              identifier="myLocation"
-            />
-          )}
+      {myLocation?.location && myLocation.location.lat && myLocation.location.lng && (
+        <Marker
+          pinColor={'purple'}
+          coordinate={{
+            latitude: myLocation.location.lat,
+            longitude: myLocation.location.lng,
+          }}
+          title="Origin"
+          description={myLocation.description}
+          identifier="myLocation"
+        />
+      )}
     </MapView>
   );
 };
