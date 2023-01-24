@@ -11,7 +11,6 @@ LogBox.ignoreLogs(['Warning: ...']);
 //Ignore all log notifications
 LogBox.ignoreAllLogs();
 
-
 //React navigation stack
 import RootStack from './navigators/RootStack';
 import { store } from './store';

@@ -34,7 +34,7 @@ const RootStack = () => {
             return null;
           },
         }}
-        initialRouteName="ScanQR"
+        initialRouteName="HomeScreen"
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
@@ -45,7 +45,6 @@ const RootStack = () => {
         <Stack.Screen name="MapScreen" component={MapScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="TopUpScreen" component={TopUpScreen} />
-
         <Stack.Screen options={{ headerTintColor: primary }} name="Welcome" component={Welcome} />
       </Stack.Navigator>
     </NavigationContainer>

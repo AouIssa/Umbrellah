@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import BookOptionsCard from '../components/BookOptionsCard';
 import CostOptionsCard from '../components/CostOptionsCard';
 import NavigateCard from '../components/NavigateCard';
+import CountdownScreen from '../components/CountdownScreen';
 import { Icon } from '@rneui/base';
 import { useNavigation } from '@react-navigation/native';
 const MapScreen = () => {
@@ -30,23 +31,15 @@ const MapScreen = () => {
         <View style={tw`h-1/2`}>
           <Stack.Navigator>
             <Stack.Screen
-              name="NavigateCard"
-              component={NavigateCard}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="BookOptionsCard"
-              component={BookOptionsCard}
-              options={{
-                headerShown: false,
-              }}
-            />
-
-            <Stack.Screen
               name="CostOptionsCard"
               component={CostOptionsCard}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="CountdownScreen"
+              component={CountdownScreen}
               options={{
                 headerShown: false,
               }}

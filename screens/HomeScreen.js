@@ -42,7 +42,7 @@ const HomeScreen = () => {
                 size={20}
               />
 
-              <Text style={tw`text-base font-medium text-center text-black`}>Balance: RM{balance.balance}</Text>
+              <Text style={tw`text-base font-medium text-center text-black`}>Balance: RM{balance.balance.toFixed(2)}</Text>
             </TouchableOpacity>
           </SafeAreaView>
 
@@ -108,7 +108,7 @@ const HomeScreen = () => {
                   description: data.description,
                 }),
               );
-              console.log(details);
+              console.log(data);
             }}
             predefinedPlaces={[
               {

@@ -13,12 +13,40 @@ import {
 } from '../slices/navSlice';
 import MapViewDirections from 'react-native-maps-directions';
 import { GOOGLE_MAPS_APIKEY } from '@env';
+import * as Location from 'expo-location';
 
 const Map = () => {
   const origin = useSelector(selectOrigin);
   const destination = useSelector(selectDestination);
   const mapRef = useRef(null);
   const dispatch = useDispatch();
+
+  const [myLocation, setMyLocation] = useState({});
+  const userLocationX = myLocation.location
+    ? { latitude: myLocation.location.lat, longitude: myLocation.location.lng }
+    : {};
+
+    useEffect(() => {
+      (async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          setErrorMsg('Permission to access location was denied');
+        }
+        let location = await Location.getCurrentPositionAsync({});
+        setMyLocation({ location: { lat: location.coords.latitude, lng: location.coords.longitude } });
+  
+        if (mapRef.current)
+          mapRef.current.animateToRegion(
+            {
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+              latitudeDelta: 0.005,
+              longitudeDelta: 0.005,
+            },
+            1000,
+          );
+      })();
+    }, []);
 
   useEffect(() => {
     if (!origin || !destination) return;
@@ -119,6 +147,19 @@ const Map = () => {
           identifier="destination"
         />
       )}
+
+          {myLocation?.location && myLocation.location.lat && myLocation.location.lng && (
+            <Marker
+              pinColor={'purple'}
+              coordinate={{
+                latitude: myLocation.location.lat,
+                longitude: myLocation.location.lng,
+              }}
+              title="Origin"
+              description={myLocation.description}
+              identifier="myLocation"
+            />
+          )}
     </MapView>
   );
 };
