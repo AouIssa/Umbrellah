@@ -1,16 +1,17 @@
 import { StyleSheet, Text, View, SafeAreaView, Image, KeyboardAvoidingView, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import tw from 'twrnc';
 import NavOptions from '../components/NavOptions';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { GOOGLE_MAPS_APIKEY } from '@env';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setDestination, setOrigin } from '../slices/navSlice';
 import NavFavourites from '../components/NavFavourites';
 import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
+  const balance = useSelector((state) => state.balance);
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
@@ -24,6 +25,9 @@ const HomeScreen = () => {
             }}
             source={require('./../assets/Logo.png')}
           />
+
+          <Text style={tw`text-3xl font-medium text-center`}>Balance: ${balance.balance}</Text>
+
           <Text>FROM</Text>
           <GooglePlacesAutocomplete
             placeholder="Where from?"
@@ -70,7 +74,6 @@ const HomeScreen = () => {
             nearbyPlacesAPI="GooglePlacesSearch"
             debounce={400}
           />
-
           <Text>To</Text>
           <GooglePlacesAutocomplete
             placeholder="Where to"
@@ -115,7 +118,6 @@ const HomeScreen = () => {
               components: 'country:MY',
             }}
           />
-
           <NavOptions />
           <NavFavourites />
         </View>
