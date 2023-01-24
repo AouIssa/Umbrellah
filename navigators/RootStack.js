@@ -12,6 +12,7 @@ import ScanQR from '../screens/ScanQR';
 import Umbrella from '../screens/Umbrella';
 import HomeScreen from '../screens/HomeScreen';
 import MapScreen from '../screens/MapScreen';
+import TopUpScreen from '../screens/TopUpScreen';
 import DirectionsScreen from '../screens/DirectionsScreen';
 //React Navigation
 import { NavigationContainer } from '@react-navigation/native';
@@ -33,7 +34,7 @@ const RootStack = () => {
             return null;
           },
         }}
-        initialRouteName="Explore"
+        initialRouteName="TopUpScreen"
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
@@ -43,7 +44,8 @@ const RootStack = () => {
         <Stack.Screen name="Umbrella" component={Umbrella} />
         <Stack.Screen name="MapScreen" component={MapScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="DirectionsScreen" component={DirectionsScreen} />
+        <Stack.Screen name="TopUpScreen" component={TopUpScreen} />
+
         <Stack.Screen options={{ headerTintColor: primary }} name="Welcome" component={Welcome} />
       </Stack.Navigator>
     </NavigationContainer>
