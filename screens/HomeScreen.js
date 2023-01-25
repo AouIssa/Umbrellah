@@ -45,7 +45,7 @@ const HomeScreen = () => {
               <Text style={tw`text-base font-medium text-center text-black`}>Balance: RM{balance.balance.toFixed(2)}</Text>
             </TouchableOpacity>
           </SafeAreaView>
-
+{/* 
           <Text>FROM</Text>
           <GooglePlacesAutocomplete
             placeholder="Where from?"
@@ -135,7 +135,7 @@ const HomeScreen = () => {
               language: 'en',
               components: 'country:MY',
             }}
-          />
+          /> */}
           {/* <NavOptions /> */}
           <NavFavourites />
           <View style={tw`${!destination && 'opacity-40'}`}>

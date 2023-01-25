@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import { selectTravelTimeInformation } from '../slices/navSlice';
 import tw from 'twrnc';
@@ -28,6 +28,9 @@ const CountdownScreen = () => {
         Time remaining: {minutes}:{seconds < 10 ? '0' : ''}
         {seconds}
       </Text>
+      <TouchableOpacity style={tw`bg-indigo-500 p-2 rounded-md`} onPress={() => navigation.navigate('HomeScreen')}>
+        <Text style={tw`text-white`}>Complete Journey</Text>
+      </TouchableOpacity>
     </View>
   );
 };

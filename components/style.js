@@ -118,7 +118,7 @@ export const StyledTextInput = styled.TextInput`
 `;
 
 export const StyledInputLabel = styled.Text`
-  color: ${tertiary};
+  color: ${primary};
   font-size: 13px;
   text-align: left;
 `;

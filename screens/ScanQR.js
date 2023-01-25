@@ -18,6 +18,7 @@ const ScanQR = () => {
   const [text, setText] = useState('Not yet scanned');
   const dispatch = useDispatch();
   const origin = useSelector(selectOrigin);
+  const [umbrellaType, setUmbrellaType] = useState(''); // global variable to store umbrella type
 
   const askForCameraPermission = () => {
     (async () => {
@@ -36,13 +37,13 @@ const ScanQR = () => {
     setScanned(true);
     setText(data);
     console.log('Type: ' + type + '\nData: ' + data);
-    if (data == '1290Umbre') {
-      dispatch(
-        setOrigin({
-          location: { lat: 3.0023237, lng: 101.7059165 },
-          description: 'Sultan Abdul Samad Library, Jalan Upm, Serdang, Selangor, Malaysia',
-        }),
-      );
+    if (data == 'UmbrellaUV') {
+      setUmbrellaType('UV');
+      navigation.navigate('HomeScreen');
+    }
+
+    if (data == 'NormalUmbrella') {
+      setUmbrellaType('normal');
       navigation.navigate('HomeScreen');
     }
   };

@@ -12,13 +12,13 @@ const data = [
   {
     id: 'Umbrella',
     title: 'UmbrellaX',
-    multiplier: 1,
+    multiplier: 0.2,
     image: 'https://i.imgur.com/3VuMW54.png',
   },
   {
     id: 'UmbrellaUV',
     title: 'Umbrella UV',
-    multiplier: 1.2,
+    multiplier: 5,
     image: 'https://i.imgur.com/xV9myuC.png',
   },
 ];
@@ -29,10 +29,10 @@ const CostOptionsCard = () => {
   const balance = useSelector((state) => state.balance);
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const cost = (travelTimeInformation?.duration?.value * selected?.multiplier) / 100;
 
   const handleChoose = () => {
     // Deduct the cost from the balance
-    const cost = (travelTimeInformation?.duration?.value * selected?.multiplier) / 100;
     if (cost > balance) {
       alert('Not Enough Balance');
     } else {
@@ -84,11 +84,15 @@ const CostOptionsCard = () => {
         )}
       />
       <View style={tw`mt-auto border-t border-gray-200`}>
-        <TouchableOpacity style={tw`${!selected && 'opacity-40'}`} disabled={!selected} onPress={handleChoose}>
-          <View style={tw`bg-[#744AFF] py-6 m-3 rounded-full`}>
-            <Text style={tw`text-center text-white text-2xl`}>Choose {selected?.title} </Text>
-          </View>
-        </TouchableOpacity>
+        {cost > balance.balance ? (
+          <Text style={tw`py-5 text-center text-gray-400`}>Not Enough Balance, Please top up by click on the wallet icon</Text>
+        ) : (
+          <TouchableOpacity style={tw`${!selected && 'opacity-40'}`} disabled={!selected} onPress={handleChoose}>
+            <View style={tw`bg-[#744AFF] py-6 m-3 rounded-full`}>
+              <Text style={tw`text-center text-white text-2xl`}>Choose {selected?.title} </Text>
+            </View>
+          </TouchableOpacity>
+        )}
       </View>
     </SafeAreaView>
   );

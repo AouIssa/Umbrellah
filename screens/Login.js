@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 
+import tw from 'twrnc';
 // formik
 import { Formik } from 'formik';
 
@@ -40,6 +41,7 @@ import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 import axios from 'axios';
 
 import baseURL from '../api/client';
+import tailwind from 'twrnc';
 
 const Login = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);

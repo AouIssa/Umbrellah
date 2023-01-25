@@ -13,6 +13,8 @@ import Umbrella from '../screens/Umbrella';
 import HomeScreen from '../screens/HomeScreen';
 import MapScreen from '../screens/MapScreen';
 import TopUpScreen from '../screens/TopUpScreen';
+import ThankYouScreen from '../screens/ThankYouScreen';
+import TakePictureScreen from '../screens/TakePictureScreen';
 import DirectionsScreen from '../screens/DirectionsScreen';
 //React Navigation
 import { NavigationContainer } from '@react-navigation/native';
@@ -34,7 +36,7 @@ const RootStack = () => {
             return null;
           },
         }}
-        initialRouteName="HomeScreen"
+        initialRouteName="TakePictureScreen"
       >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
@@ -45,6 +47,9 @@ const RootStack = () => {
         <Stack.Screen name="MapScreen" component={MapScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="TopUpScreen" component={TopUpScreen} />
+        <Stack.Screen name="ThankYouScreen" component={ThankYouScreen} />
+        <Stack.Screen name="TakePictureScreen" component={TakePictureScreen} />
+
         <Stack.Screen options={{ headerTintColor: primary }} name="Welcome" component={Welcome} />
       </Stack.Navigator>
     </NavigationContainer>
