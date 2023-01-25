@@ -37,10 +37,7 @@ const ScanQR = () => {
     setScanned(true);
     setText(data);
     console.log('Type: ' + type + '\nData: ' + data);
-    if (data == 'UmbrellaUV') {
-      setUmbrellaType('UV');
-      navigation.navigate('HomeScreen');
-    }
+  
 
     if (data == 'NormalUmbrella') {
       setUmbrellaType('normal');

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Image } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import tw from 'twrnc';
@@ -63,7 +63,7 @@ const Explore = () => {
     <KeyboardAvoidingView behavior="padding">
       <View style={tw`h-8/10`}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('HomeScreen')}
+          onPress={() => navigation.navigate('Welcome',{ uname: 'John Doe' })}
           style={tw`bg-gray-100 absolute top-16 left-8 z-50 p-3 rounded-full shadow-lg`}
         >
           <Icon name="menu" />
@@ -96,7 +96,7 @@ const Explore = () => {
           )}
           {myLocation?.location && myLocation.location.lat && myLocation.location.lng && (
             <Marker
-              pinColor={'green'}
+              pinColor={'purple'}
               coordinate={{
                 latitude: myLocation.location.lat,
                 longitude: myLocation.location.lng,
@@ -118,16 +118,76 @@ const Explore = () => {
               identifier="myDestination"
             />
           )}
+
           <Marker
             coordinate={{ latitude: 3.0023332225574935, longitude: 101.70615252014524 }}
-            onPress={() => setMyDestination({ 
-              location: { lat: 3.0023332225574935, lng: 101.70615252014524 } })}
+            onPress={() =>
+              setMyDestination({
+                location: { lat: 3.0023332225574935, lng: 101.70615252014524 },
+              })
+            }
             identifier="myDestination"
-          />
+          >
+            <Icon style={tw`mr-4 rounded-full bg-[#097969] p-3`} name="book" type="ionicon" color="white" size={30} />
+          </Marker>
+
+          <Marker
+            coordinate={{ latitude: 3.028645, longitude: 101.709432 }}
+            onPress={() =>
+              setMyDestination({
+                location: { lat: 3.028645, lng: 101.709432 },
+              })
+            }
+            identifier="myDestination"
+          >
+            <Icon
+              style={tw`mr-4 rounded-full bg-[#097969] p-3`}
+              name="bus-outline"
+              type="ionicon"
+              color="white"
+              size={30}
+            />
+          </Marker>
+
+          <Marker
+            coordinate={{ latitude: 2.9912553, longitude: 101.7073212 }}
+            onPress={() =>
+              setMyDestination({
+                location: { lat: 2.9912553, lng: 101.7073212 },
+              })
+            }
+            identifier="myDestination"
+          >
+            <Icon
+              style={tw`mr-4 rounded-full bg-[#097969] p-3`}
+              name="fast-food-outline"
+              type="ionicon"
+              color="white"
+              size={30}
+            />
+          </Marker>
+
+          <Marker
+            coordinate={{ latitude: 2.9863713, longitude: 101.7258334 }}
+            onPress={() =>
+              setMyDestination({
+                location: { lat: 2.9863713, lng: 101.7258334 },
+              })
+            }
+            identifier="myDestination"
+          >
+            <Icon
+              style={tw`mr-4 rounded-full bg-[#097969] p-3`}
+              name="football-outline"
+              type="ionicon"
+              color="white"
+              size={30}
+            />
+          </Marker>
         </MapView>
       </View>
-      <View style={tw`h-2/10`}>
-        <GooglePlacesAutocomplete
+      <View style={tw`h-5/10`}>
+        {/* <GooglePlacesAutocomplete
           placeholder="Search destination"
           minLength={2} // minimum length of text to search
           autoFocus={false}
@@ -157,7 +217,7 @@ const Explore = () => {
           }}
           currentLocation={false}
           currentLocationLabel="Current location"
-        />
+        /> */}
       </View>
     </KeyboardAvoidingView>
   );
