@@ -37,7 +37,7 @@ const Welcome = ({navigation, route}) => {
           <StyledFormArea>
 
             <Line />
-            <StyledButton onPress={() => {navigation.navigate('HomeScreen')}}>
+            <StyledButton onPress={() => {navigation.navigate('ScanQR')}}>
               <ButtonText>Book An Umbrella</ButtonText>
             </StyledButton>
 

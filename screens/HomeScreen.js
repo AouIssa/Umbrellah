@@ -91,8 +91,9 @@ const HomeScreen = () => {
             }}
             nearbyPlacesAPI="GooglePlacesSearch"
             debounce={400}
-          />
-          <Text>To</Text>
+          /> */}
+          
+          {/* <Text>To</Text>
           <GooglePlacesAutocomplete
             placeholder="Where to"
             nearbyPlacesAPI="GooglePlacesSearch"

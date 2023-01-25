@@ -13,7 +13,6 @@ import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 //api client
 import axios from 'axios';
 
-
 import {
   StyledContainer,
   InnerContainer,
@@ -41,10 +40,12 @@ import { View, TouchableOpacity, ActivityIndicator } from 'react-native';
 const { brand, darkLight, primary } = Colors;
 
 import baseURL from '../api/client';
+import { useNavigation } from '@react-navigation/native';
 
-const SignUp = ({ navigation }) => {
+const SignUp = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [show, setShow] = useState(false);
+  const navigation = useNavigation();
 
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
@@ -62,7 +63,7 @@ const SignUp = ({ navigation }) => {
         if (status !== 'SUCCESS') {
           handleMessage(message, status);
         } else {
-          navigation.navigate({ SignUpSuccess });
+          navigation.navigate('SignUpSuccess');
         }
         setSubmitting(false);
       })
@@ -73,8 +74,6 @@ const SignUp = ({ navigation }) => {
       });
   };
 
-
-  
   const handleMessage = (message, type = 'FAILED') => {
     setMessage(message);
     setMessageType(type);
@@ -90,7 +89,7 @@ const SignUp = ({ navigation }) => {
           <Formik
             initialValues={{ name: '', email: '', password: '', confrimPassword: '' }}
             onSubmit={(values, { setSubmitting }) => {
-              values = {...values};
+              values = { ...values };
               if (values.name == '' || values.email == '' || values.password == '' || values.confirmPassword == '') {
                 handleMessage('Please fill all the fields');
                 setSubmitting(false);
@@ -151,7 +150,6 @@ const SignUp = ({ navigation }) => {
                   setHidePassword={setHidePassword}
                 />
                 <MsgBox type={messageType}>{message}</MsgBox>
-               
 
                 {!isSubmitting && (
                   <StyledButton onPress={handleSubmit}>
@@ -164,7 +162,6 @@ const SignUp = ({ navigation }) => {
                     <ActivityIndicator size="large" color={primary} />
                   </StyledButton>
                 )}
-
 
                 <Line />
 

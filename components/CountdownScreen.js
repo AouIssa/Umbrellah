@@ -3,11 +3,12 @@ import { View, Text, Button, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import { selectTravelTimeInformation } from '../slices/navSlice';
 import tw from 'twrnc';
+import { useNavigation } from '@react-navigation/native';
 
 const CountdownScreen = () => {
   const [timeRemaining, setTimeRemaining] = useState(0);
   const travelTimeInformation = useSelector(selectTravelTimeInformation);
-
+  const navigation = useNavigation();
   useEffect(() => {
     if (travelTimeInformation) {
       setTimeRemaining(travelTimeInformation.duration.value * 1000); // convert duration from seconds to milliseconds
@@ -28,7 +29,7 @@ const CountdownScreen = () => {
         Time remaining: {minutes}:{seconds < 10 ? '0' : ''}
         {seconds}
       </Text>
-      <TouchableOpacity style={tw`bg-indigo-500 p-2 rounded-md`} onPress={() => navigation.navigate('HomeScreen')}>
+      <TouchableOpacity style={tw`bg-indigo-500 p-2 rounded-md`} onPress={() => navigation.navigate('TakePictureScreen')}>
         <Text style={tw`text-white`}>Complete Journey</Text>
       </TouchableOpacity>
     </View>
