@@ -15,7 +15,6 @@ const MapScreen = () => {
   const navigation = useNavigation();
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
       <View>
         <TouchableOpacity
           onPress={() => navigation.navigate('HomeScreen')}
@@ -47,7 +46,6 @@ const MapScreen = () => {
           </Stack.Navigator>
         </View>
       </View>
-    </KeyboardAvoidingView>
   );
 };
 

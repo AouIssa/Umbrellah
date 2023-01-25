@@ -23,15 +23,16 @@ const HomeScreen = () => {
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
       <View style={tw`bg-gray-100 h-full`}>
         <View style={tw`p-5`}>
-          <Image
-            style={{
-              width: 100,
-              height: 100,
-              resizeMode: 'contain',
-            }}
-            source={require('./../assets/Logo.png')}
-          />
-
+          <TouchableOpacity onPress={() => navigation.navigate('Welcome',{ uname: 'John Doe' })}>
+            <Image
+              style={{
+                width: 100,
+                height: 100,
+                resizeMode: 'contain',
+              }}
+              source={require('./../assets/Logo.png')}
+            />
+          </TouchableOpacity>
           <SafeAreaView style={tw`absolute top-10 right-5 p-2 rounded-lg bg-white shadow-md`}>
             <TouchableOpacity style={tw`flex-row items-center p-3`} onPress={() => navigation.navigate('TopUpScreen')}>
               <Icon
@@ -42,10 +43,12 @@ const HomeScreen = () => {
                 size={20}
               />
 
-              <Text style={tw`text-base font-medium text-center text-black`}>Balance: RM{balance.balance.toFixed(2)}</Text>
+              <Text style={tw`text-base font-medium text-center text-black`}>
+                Balance: RM{balance.balance.toFixed(2)}
+              </Text>
             </TouchableOpacity>
           </SafeAreaView>
-{/* 
+          {/* 
           <Text>FROM</Text>
           <GooglePlacesAutocomplete
             placeholder="Where from?"
@@ -92,7 +95,7 @@ const HomeScreen = () => {
             nearbyPlacesAPI="GooglePlacesSearch"
             debounce={400}
           /> */}
-          
+
           {/* <Text>To</Text>
           <GooglePlacesAutocomplete
             placeholder="Where to"
